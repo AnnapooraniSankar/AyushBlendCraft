@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="display-1">Result for Students</h1>
+        
+        <!-- Form for disease selection -->
+        <form id="diseaseForm" class="mb-4">
+            <div class="mb-3">
+                <label for="diseaseDropdown" class="form-label">Select Disease:</label>
+                <select class="form-select" id="diseaseDropdown" required>
+                    <option value="">Select a disease</option>
+                    <option value="tuberculosis">Tuberculosis</option>
+                    <option value="rheumatoid arthritis">Rheumatoid Arthritis</option>
+                    <option value="stroke">Stroke</option>
+                    <option value="heart disease">Heart Disease</option>
+                    <option value="thyroid">Thyroid</option>
+                    <option value="multiple sclerosis">Multiple Sclerosis</option>
+                    <option value="kidney">Kidney Disease</option>
+                    <option value="liver">Liver Disease</option>
+                    <option value="epilepsy">Epilepsy</option>
+                    <option value="anemia">Anemia</option>
+                    <option value="diabetes">Diabetes</option>
+                    <option value="bronchitis">Bronchitis</option>
+                    <option value="dengue">Dengue</option>
+                    <option value="malaria">Malaria</option>
+                    <option value="hypertension">Hypertension</option>
+                    <option value="lung disease">Lung Disease</option>
+                    <option value="alzheimer">Alzheimer's Disease</option>
+                    <option value="parkinson">Parkinson's Disease</option>
+                    <option value="covid-19">COVID-19</option>
+                    <option value="cystic fibrosis">Cystic Fibrosis</option>
+                    <option value="chronic fatigue syndrome">Chronic Fatigue Syndrome</option>
+                    <option value="anaemia">Anaemia</option>
+                    <option value="asthma">Asthma</option>
+                    <option value="cancer">Cancer</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Get Result</button>
+        </form>
+
+        <!-- Result display area -->
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("diseaseForm").onsubmit = function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get the disease name from the dropdown
+            const disease = document.getElementById("diseaseDropdown").value.trim().toLowerCase();
+            let resultHtml = "";
+
+            if (disease) {
+                if (disease === "tuberculosis") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: TUBERCULOSIS</b></h2>
+                        <img src="tuberculosis.jpg" alt="Tuberculosis" width="300" height="300">
+                        <p>FOR TUBERCULOSIS, WE USE: <b>VASAKA SYRUP</b></p>
+                        <img src="a.jpg" alt="Vasaka Syrup" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Cough</li>
+                            <li>Chest Pain</li>
+                            <li>Fatigue</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Adhatoda Vasica</li>
+                        </ul>
+                        <img src="aa.jpg" alt="Adhatoda Vasica" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>India</li> 
+                            <li>Sri Lanka</li>
+                            <li>Nepal</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps in respiratory ailments</li>
+                            <li>Acts as an expectorant</li> 
+                            <li>Has anti-inflammatory properties</li>
+                        </ul>
+                    `;
+                } else if (disease === "rheumatoid arthritis") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: RHEUMATOID ARTHRITIS</b></h2>
+                        <img src="r.jpg" alt="Rheumatoid Arthritis" width="300" height="300">
+                        <p>FOR RHEUMATOID ARTHRITIS, WE USE: <b>MAHOYAGRAJ GUGGLU</b></p>
+                        <img src="joint pain.jpg" alt="Mahoyagraj Gugglu" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Joint pain</li>
+                            <li>Swelling</li>
+                            <li>Stiffness</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Gugglu</li>
+                            <li>Ashwagandha</li>
+                            <li>Triphala</li>
+                        </ul>
+                        <img src="g.jpg" alt="Gugglu" width="300" height="300">
+                        <img src="2.jpg" alt="Ashwagandha" width="300" height="300">
+                        <img src="t.jpg" alt="Triphala" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>India</li> 
+                            <li>Pakistan</li>
+                            <li>Bangladesh</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Anti-inflammatory</li>
+                            <li>Supports joint health</li> 
+                            <li>Enhances mobility</li>
+                        </ul>
+                    `;
+                } else if (disease === "stroke") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: STROKE</b></h2>
+                        <img src="4.jpg" alt="Stroke" width="300" height="300">
+                        <p>FOR STROKE, WE USE: <b>BRAHMI VATI</b></p>
+                        <img src="3.jpg" alt="Brahmi Vati" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Paralysis</li>
+                            <li>Speech Difficulty</li>
+                            <li>Confusion</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Bacopa Monnieri</li>
+                        </ul>
+                        <img src="22.jpg" alt="Bacopa Monnieri" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>India</li> 
+                            <li>China</li>
+                            <li>Nepal</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Improves cognitive function</li>
+                            <li>Enhances brain health</li>
+                            <li>Reduces anxiety</li>
+                        </ul>
+                    `;
+                } else if (disease === "heart disease") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: HEART DISEASE</b></h2>
+                        <img src="HH.jpg" alt="Heart Disease" width="300" height="300">
+                        <p>FOR HEART DISEASE, WE USE: <b>ASHWAGANDHA</b></p>
+                        <img src="333.jpg" alt="Ashwagandha" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Chest pain</li>
+                            <li>Shortness of breath</li>
+                            <li>Fatigue</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Withania somnifera (Ashwagandha)</li>
+                        </ul>
+                        <img src="MM.jpg" alt="Ashwagandha Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>India</li> 
+                            <li>Africa</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Reduces stress</li>
+                            <li>Boosts heart health</li>
+                            <li>Improves circulation</li>
+                        </ul>
+                    `;
+                } else if (disease === "thyroid") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: THYROID</b></h2>
+                        <img src="2024.jpg" alt="Thyroid" width="300" height="300">
+                        <p>FOR THYROID, WE USE: <b>ASHWAGANDHA</b></p>
+                        <img src="333.jpg" alt="Ashwagandha" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Fatigue</li>
+                            <li>Weight Gain</li>
+                            <li>Dry Skin</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Withania somnifera (Ashwagandha)</li>
+                        </ul>
+                        <img src="MM.jpg" alt="Ashwagandha Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>India</li>
+                            <li>Africa</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps in hormone balance</li>
+                            <li>Reduces stress</li>
+                        </ul>
+                    `;
+                } else if (disease === "multiple sclerosis") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: MULTIPLE SCLEROSIS</b></h2>
+                        <img src="ms.jpg" alt="Multiple Sclerosis" width="300" height="300">
+                        <p>FOR MULTIPLE SCLEROSIS, WE USE: <b>GINKGO BILOBA</b></p>
+                        <img src="GI.jpg" alt="Ginkgo Biloba" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Vision Problems</li>
+                            <li>Muscle Weakness</li>
+                            <li>Coordination Issues</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Ginkgo Biloba</li>
+                        </ul>
+                        <img src="P.jpg" alt="Ginkgo Biloba" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>China</li>
+                            <li>Japan</li>
+                            <li>Korea</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Improves circulation</li>
+                            <li>Boosts cognitive function</li>
+                            <li>Helps with nerve health</li>
+                        </ul>
+                    `;
+                } else if (disease === "kidney") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: KIDNEY DISEASE</b></h2>
+                        <img src="K.jpg" alt="Kidney Disease" width="300" height="300">
+                        <p>FOR KIDNEY DISEASE, WE USE: <b>NETTLE</b></p>
+                        <img src="U.jpg" alt="Nettle" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Fatigue</li>
+                            <li>Swelling in ankles or legs</li>
+                            <li>Urination changes</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Urtica dioica (Nettle)</li>
+                        </ul>
+                        <img src="L.jpg" alt="Nettle Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps with kidney detoxification</li>
+                            <li>Supports urinary tract health</li>
+                        </ul>
+                    `;
+                } else if (disease === "liver") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: LIVER DISEASE</b></h2>
+                        <img src="H.jpg" alt="Liver Disease" width="300" height="300">
+                        <p>FOR LIVER DISEASE, WE USE: <b>MILK THISTLE</b></p>
+                        <img src="30.jpg" alt="Milk Thistle" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Jaundice</li>
+                            <li>Abdominal pain</li>
+                            <li>Fatigue</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Silybum marianum (Milk Thistle)</li>
+                        </ul>
+                        <img src="8.jpg" alt="Milk Thistle Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Europe</li>
+                            <li>North America</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Supports liver detoxification</li>
+                            <li>Reduces liver inflammation</li>
+                        </ul>
+                    `;
+                } else if (disease === "epilepsy") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: EPILEPSY</b></h2>
+                        <img src="E.jpg" alt="Epilepsy" width="300" height="300">
+                        <p>FOR EPILEPSY, WE USE: <b>VALERIAN ROOT</b></p>
+                        <img src="180.jpg" alt="Valerian Root" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Seizures</li>
+                            <li>Uncontrollable jerking movements</li>
+                            <li>Temporary confusion</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Valeriana officinalis (Valerian Root)</li>
+                        </ul>
+                        <img src="N.jpg" alt="Valerian Root Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Europe</li>
+                            <li>Asia</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps reduce seizure frequency</li>
+                            <li>Relieves anxiety and stress</li>
+                        </ul>
+                    `;
+                } else if (disease === "anemia") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: ANEMIA</b></h2>
+                        <img src="9.jpg" alt="Anemia" width="300" height="300">
+                        <p>FOR ANEMIA, WE USE: <b>NETTLE</b></p>
+                        <img src="U.jpg" alt="Nettle" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Fatigue</li>
+                            <li>Pale skin</li>
+                            <li>Shortness of breath</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Urtica dioica (Nettle)</li>
+                        </ul>
+                        <img src="L.jpg" alt="Nettle Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps increase iron levels</li>
+                            <li>Improves overall blood circulation</li>
+                        </ul>
+                    `;
+                } else if (disease === "diabetes") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: DIABETES</b></h2>
+                        <img src="D.jpg" alt="Diabetes" width="300" height="300">
+                        <p>FOR DIABETES, WE USE: <b>BITTER MELON</b></p>
+                        <img src="7.jpg" alt="Bitter Melon" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Excessive thirst</li>
+                            <li>Frequent urination</li>
+                            <li>Fatigue</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Momordica charantia (Bitter Melon)</li>
+                        </ul>
+                        <img src="6.jpg" alt="Bitter Melon Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Asia</li>
+                            <li>Africa</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps regulate blood sugar levels</li>
+                            <li>Improves insulin sensitivity</li>
+                        </ul>
+                    `;
+                } else if (disease === "bronchitis") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: BRONCHITIS</b></h2>
+                        <img src="5.jpg" alt="Bronchitis" width="300" height="300">
+                        <p>FOR BRONCHITIS, WE USE: <b>OREGANO</b></p>
+                        <img src="v.jpg" alt="Oregano" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Persistent cough</li>
+                            <li>Chest discomfort</li>
+                            <li>Shortness of breath</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Origanum vulgare (Oregano)</li>
+                        </ul>
+                        <img src="vv.jpg" alt="Oregano Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Europe</li>
+                            <li>Asia</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps relieve bronchial irritation</li>
+                            <li>Reduces inflammation in the airways</li>
+                        </ul>
+                    `;
+                } else if (disease === "dengue") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: DENGUE</b></h2>
+                        <img src="99999.jpg" alt="Dengue" width="300" height="300">
+                        <p>FOR DENGUE, WE USE: <b> VADIRA ANTIVIRAL</b></p>
+                        <img src="III.jpg" alt="Neem" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>High Fever</li>
+                            <li>Severe Headache</li>
+                            <li>Joint Pain</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Azadirachta indica (Neem)</li>
+                        </ul>
+                        <img src="KK.jpg" alt="Neem Tree" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>South Asia</li>
+                            <li>Africa</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Anti-inflammatory</li>
+                            <li>Antibacterial properties</li>
+                            <li>Reduces fever</li>
+                        </ul>
+                    `;
+                } else if (disease === "malaria") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: MALARIA</b></h2>
+                        <img src="65.jpg" alt="Malaria" width="300" height="300">
+                        <p>FOR MALARIA, WE USE: <b>QUININE</b></p>
+                        <img src="12.jpg" alt="Quinine" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Fever</li>
+                            <li>Shaking chills</li>
+                            <li>Fatigue</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Cinchona officinalis (Quinine)</li>
+                        </ul>
+                        <img src="JJ.jpg" alt="Quinine Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Tropical regions worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Anti-malarial properties</li>
+                            <li>Reduces fever</li>
+                        </ul>
+                    `;
+                } else if (disease === "hypertension") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: HYPERTENSION</b></h2>
+                        <img src="BB.jpg" alt="Hypertension" width="300" height="300">
+                        <p>FOR HYPERTENSION, WE USE: <b>ASHWAGANDHA</b></p>
+                        <img src="333.jpg" alt="Ashwagandha" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Headaches</li>
+                            <li>Dizziness</li>
+                            <li>Shortness of breath</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Withania somnifera (Ashwagandha)</li>
+                        </ul>
+                        <img src="MM.jpg" alt="Ashwagandha Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps lower blood pressure</li>
+                            <li>Reduces stress</li>
+                        </ul>
+                    `;
+                } else if (disease === "lung disease") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: LUNG DISEASE</b></h2>
+                        <img src="TT.jpg" alt="Lung Disease" width="300" height="300">
+                        <p>FOR LUNG DISEASE, WE USE: <b>EUCALYPTUS</b></p>
+                        <img src="X.jpg" alt="Eucalyptus" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Coughing</li>
+                            <li>Shortness of breath</li>
+                            <li>Wheezing</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Eucalyptus globulus</li>
+                        </ul>
+                        <img src="16.jpg" alt="Eucalyptus Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Australia</li>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps clear respiratory congestion</li>
+                            <li>Relieves coughing</li>
+                        </ul>
+                    `;
+                } else if (disease === "alzheimer") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: ALZHEIMER'S DISEASE</b></h2>
+                        <img src="zz.jpg" alt="Alzheimer's Disease" width="300" height="300">
+                        <p>FOR ALZHEIMER'S, WE USE: <b>GINKGO BILOBA</b></p>
+                        <img src="86.jpg" alt="Ginkgo Biloba" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Memory loss</li>
+                            <li>Confusion</li>
+                            <li>Difficulty speaking</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Ginkgo biloba</li>
+                        </ul>
+                        <img src="111.jpg" alt="Ginkgo Biloba" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>China</li>
+                            <li>Japan</li>
+                            <li>Korea</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Improves memory and cognitive function</li>
+                            <li>Enhances blood circulation to the brain</li>
+                        </ul>
+                    `;
+                } else if (disease === "parkinson") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: PARKINSON'S DISEASE</b></h2>
+                        <img src="888.jpg" alt="Parkinson's Disease" width="300" height="300">
+                        <p>FOR PARKINSON'S, WE USE: <b>ASHWAGANDHA</b></p>
+                        <img src="333.jpg" alt="Ashwagandha" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Tremors</li>
+                            <li>Muscle stiffness</li>
+                            <li>Impaired balance</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Withania somnifera (Ashwagandha)</li>
+                        </ul>
+                        <img src="MM.jpg" alt="Ashwagandha Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>India</li>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Supports nervous system health</li>
+                            <li>Reduces stress and anxiety</li>
+                        </ul>
+                    `;
+                } else if (disease === "covid-19") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: COVID-19</b></h2>
+                        <img src="6666.jpg" alt="COVID-19" width="300" height="300">
+                        <p>FOR COVID-19, WE USE: <b>NEEM</b></p>
+                        <img src="23".jpg" alt="Neem" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Fever</li>
+                            <li>Cough</li>
+                            <li>Shortness of breath</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Azadirachta indica (Neem)</li>
+                        </ul>
+                        <img src="KK.jpg" alt="Neem Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Antibacterial</li>
+                            <li>Antiviral properties</li>
+                        </ul>
+                    `;
+                } else if (disease === "cystic fibrosis") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: CYSTIC FIBROSIS</b></h2>
+                        <img src="129.jpg" alt="Cystic Fibrosis" width="300" height="300">
+                        <p>FOR CYSTIC FIBROSIS, WE USE: <b>GARLIC</b></p>
+                        <img src="999.jpg" alt="Garlic" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Frequent lung infections</li>
+                            <li>Difficulty breathing</li>
+                            <li>Coughing with mucus</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Allium sativum (Garlic)</li>
+                        </ul>
+                        <img src="348.jpg" alt="Garlic Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Helps improve lung function</li>
+                            <li>Acts as an antimicrobial</li>
+                        </ul>
+                    `;
+                } else if (disease === "chronic fatigue syndrome") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: CHRONIC FATIGUE SYNDROME</b></h2>
+                        <img src="2533.jpg" alt="Chronic Fatigue Syndrome" width="300" height="300">
+                        <p>FOR CHRONIC FATIGUE SYNDROME, WE USE: <b>GINSENG</b></p>
+                        <img src="655.jpg" alt="Ginseng" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Extreme fatigue</li>
+                            <li>Muscle and joint pain</li>
+                            <li>Headaches</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Panax ginseng</li>
+                        </ul>
+                        <img src="565.jpg" alt="Ginseng Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>East Asia</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Boosts energy levels</li>
+                            <li>Reduces stress</li>
+                        </ul>
+                    `;
+                } else if (disease === "anaemia") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: ANAEMIA</b></h2>
+                        <img src="444.jpg" alt="Anaemia" width="300" height="300">
+                        <p>FOR ANAEMIA, WE USE: <b>IRON SUPPLEMENTS</b></p>
+                        <img src="1000.jpg" alt="Iron Supplements" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Fatigue</li>
+                            <li>Paleness</li>
+                            <li>Shortness of Breath</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Spinach</li>
+                            <li>Beetroot</li>
+                        </ul>
+                        <img src="ddd.jpg" alt="Spinach" width="300" height="300">
+                        <img src="llll.jpg" alt="Beetroot" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Boosts hemoglobin production</li>
+                            <li>Improves energy levels</li>
+                            <li>Helps in preventing fatigue</li>
+                        </ul>
+                    `;
+                } else if (disease === "asthma") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME: ASTHMA</b></h2>
+                        <img src="66666.jpg" alt="Asthma" width="300" height="300">
+                        <p>FOR ASTHMA, WE USE: <b>GINGER</b></p>
+                        <img src="hhhh.jpg" alt="Ginger" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Wheezing</li>
+                            <li>Coughing</li>
+                            <li>Shortness of Breath</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Ginger</li>
+                            <li>Eucalyptus</li>
+                        </ul>
+                        <img src="4545.jpg" alt="Eucalyptus" width="300" height="300">
+                        <img src="16.jpg" alt="Eucalyptus" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Reduces inflammation</li>
+                            <li>Opens airways</li>
+                        </ul>
+                    `;
+                } else if (disease === "cancer") {
+                    resultHtml = `
+                        <h2><b>DISEASE NAME:CANCER</b></h2>
+                        <img src="7676.jpg" alt="Cancer" width="300" height="300">
+                        <p>FOR CANCER, WE USE: <b>TURMERIC</b></p>
+                        <img src="6767.jpg" alt="Turmeric" width="300" height="300">
+                        <p><b>SYMPTOMS</b></p>
+                        <ol>
+                            <li>Unexplained weight loss</li>
+                            <li>Fatigue</li>
+                            <li>Persistent pain</li>
+                        </ol>
+                        <h3><b>PLANTS</b></h3>
+                        <ul>
+                            <li>Turmeric</li>
+                        </ul>
+                        <img src="UUUU.jpg" alt="Turmeric Plant" width="300" height="300">
+                        <h3><b>REGIONS</b></h3>
+                        <ul>
+                            <li>Worldwide</li>
+                        </ul>
+                        <h3><b>BENEFITS</b></h3>
+                        <ul>
+                            <li>Anti-cancer properties</li>
+                            <li>Reduces inflammation</li>
+                            <li>Improves immune function</li>
+                        </ul>
+                    `;
+                } else {
+                    resultHtml = `<p>No information found for the selected disease.</p>`;
+                }
+
+                document.getElementById("result").innerHTML = resultHtml;
+            } else {
+                document.getElementById("result").innerText = "Please select a disease from the dropdown.";
+            }
+        };
+    </script>
+</body>
+</html>

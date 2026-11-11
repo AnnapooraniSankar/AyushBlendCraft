@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Student Registration</title>
+    <style>
+        body {
+            background-image: url('student.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            font-size: large;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 80%;
+            max-width: 600px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: large;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .password-container {
+            position: relative;
+            text-align: left;
+        }
+        .password-container input {
+            width: calc(100% - 40px);
+            display: inline-block;
+        }
+        .password-container .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Registration</h2>
+        <form id="registrationForm" onsubmit="return handleSubmit(event)">
+            <label for="uname"><b>Username</b></label><br>
+            <input type="text" placeholder="Enter Username" name="uname" required><br>
+            
+            <label for="email"><b>Email ID</b></label><br>
+            <input type="email" placeholder="Enter Email ID" name="email" required><br>
+            
+            <label><b>New to Login?</b></label><br>
+            <input type="radio" name="newLogin" value="yes" onclick="togglePasswordFields(true)" checked> Yes
+            <input type="radio" name="newLogin" value="no" onclick="togglePasswordFields(false)"> No<br>
+            
+            <div id="passwordFields">
+                <label for="pwd"><b>Create Password</b></label><br>
+                <div class="password-container">
+                    <input type="password" id="pwd" name="pwd" required>
+                    <span class="toggle-password" onclick="toggleShowPassword('pwd')">👁️</span>
+                </div>
+
+                <label for="cpwd"><b>Confirm Password</b></label><br>
+                <div class="password-container">
+                    <input type="password" id="cpwd" name="cpwd" required>
+                    <span class="toggle-password" onclick="toggleShowPassword('cpwd')">👁️</span>
+                </div>
+            </div>
+            
+            <div id="existingPasswordField" style="display: none;">
+                <label for="password"><b>Password</b></label><br>
+                <div class="password-container">
+                    <input type="password" id="password" name="password">
+                    <span class="toggle-password" onclick="toggleShowPassword('password')">👁️</span>
+                </div>
+            </div>
+            
+            <label for="disease"><b>Disease Name</b></label><br>
+            <select id="disease" name="disease" required>
+                <option value="">Select a Disease</option>
+                <option value="Tuberculosis">Tuberculosis</option>
+                <option value="Rheumatoid Arthritis">Rheumatoid Arthritis</option>
+                <option value="Bronchitis">Bronchitis</option>
+                <option value="Diabetes">Diabetes</option>
+                <option value="Hypertension">Hypertension</option>
+                <option value="Asthma">Asthma</option>
+                <option value="Cancer">Cancer</option>
+                <option value="COVID-19">COVID-19</option>
+                <option value="HIV/AIDS">HIV/AIDS</option>
+                <option value="Heart Disease">Heart Disease</option>
+                <option value="Stroke">Stroke</option>
+                <option value="Alzheimer's Disease">Alzheimer's Disease</option>
+                <option value="Parkinson's Disease">Parkinson's Disease</option>
+                <option value="Lung Disease">Lung Disease</option>
+                <option value="Kidney Disease">Kidney Disease</option>
+                <option value="Liver Disease">Liver Disease</option>
+                <option value="Multiple Sclerosis">Multiple Sclerosis</option>
+                <option value="Epilepsy">Epilepsy</option>
+                <option value="Cystic Fibrosis">Cystic Fibrosis</option>
+                <option value="Anemia">Anemia</option>
+                <option value="Dengue Fever">Dengue Fever</option>
+                <option value="Malaria">Malaria</option>
+                <option value="Chronic Fatigue Syndrome">Chronic Fatigue Syndrome</option>
+            </select><br>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function togglePasswordFields(isNew) {
+            var passwordFields = document.getElementById("passwordFields");
+            var existingPasswordField = document.getElementById("existingPasswordField");
+
+            if (isNew) {
+                passwordFields.style.display = "block";
+                existingPasswordField.style.display = "none";
+                document.getElementById("pwd").setAttribute("required", "true");
+                document.getElementById("cpwd").setAttribute("required", "true");
+                document.getElementById("password").removeAttribute("required");
+            } else {
+                passwordFields.style.display = "none";
+                existingPasswordField.style.display = "block";
+                document.getElementById("pwd").removeAttribute("required");
+                document.getElementById("cpwd").removeAttribute("required");
+                document.getElementById("password").setAttribute("required", "true");
+            }
+        }
+
+        function toggleShowPassword(id) {
+            var passwordField = document.getElementById(id);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();  
+            var selectedDisease = document.getElementById("disease").value;
+            if (!selectedDisease) {
+                alert("Please select a disease.");
+                return;
+            }
+            window.location.href = "RESULT OF STUDENT.html?disease=" + encodeURIComponent(selectedDisease);
+        }
+    </script>
+</body>
+</html>

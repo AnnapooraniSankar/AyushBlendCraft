@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggestions for User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function getDiseaseInfo(symptom) {
+            const diseaseData = {
+                "fever": { name: "Fever", medicine: "Amritharishtam", image: "fever.jpg", dosage: "2 tsp with water", timing: "Twice a day." },
+                "blood pressure": { name: "Blood Pressure", medicine: "Calm-Raho", image: "bp.jpg", dosage: "1 tablet", timing: "Morning and Evening." },
+                "diabetes": { name: "Diabetes", medicine: "Diaspa", image: "diabetes.jpg", dosage: "1 capsule", timing: "Before meals." },
+                "asthma": { name: "Asthma", medicine: "Astharin", image: "jjjj.jpg", dosage: "1 tsp syrup", timing: "Twice a day."},
+                "bronchitis": { name: "Bronchitis", medicine: "Sitopaladi Churna", image: "s.jpg", dosage: "½ tsp with honey", timing: "Twice a day." },
+                "stomach pain": { name: "Stomach Pain", medicine: "Pudin Hara", image: "64.jpg", dosage: "1 tablet", timing: "After meals." },
+                "headache": { name: "Headache", medicine: "Aspirin", image: "vvvv.jpg", dosage: "1 tablet", timing: "As needed." },
+                "cold": { name: "Cold", medicine: "Ayush Kwath", image: "o.jpg", dosage: "Apply on chest", timing: "As needed." },
+                "cough": { name: "Cough", medicine: "Kasni", image: "pp.jpg", dosage: "1 tsp", timing: "Twice a day." },
+                "allergy": { name: "Allergy", medicine: "Haridrakhand", image: "44.jpg", dosage: "1 tablet", timing: "Once a day." },
+                "back pain": { name: "Back Pain", medicine: "Mahayograj Guggulu", image: "joint pain.jpg", dosage: "1 tablet." },
+                "joint pain": { name: "Joint Pain", medicine: "Shallaki Capsules", image: "32.jpg", dosage: "1 capsule", timing: "Twice a day." },
+                "skin rash": { name: "Skin Rash", medicine: "Panchtikta Ghrit Gugglu", image: "skin rash.jpg", dosage: "Apply on affected area", timing: "Twice a day." },
+                "eye irritation": { name: "Eye Irritation", medicine: "Triphala Ghrita", image: "755.jpg", dosage: "1-2 drops", timing: "As needed."},
+                "nausea": { name: "Nausea", medicine: "Avipattikar Churna", image: "76.jpg", dosage: "1-2 tsp", timing: "As needed." },
+                "fatigue": { name: "Fatigue", medicine: "Ashwagandha Capsules", image: "333.jpg", dosage: "1 tablet", timing: "Once a day." },
+                "sore throat": { name: "Sore Throat", medicine: "Khadiradi vati", image: "3333.jpg", dosage: "1 tsp", timing: "Twice a day." },
+                "dizziness": { name: "Dizziness", medicine: "Brahmi Syrup", image: "02.jpg", dosage: "1 tsp", timing: "Twice a day."},
+                "chest pain": { name: "Chest Pain", medicine: "Arjunarishta", image: "49.jpg", dosage: "2 tsp", timing: "Twice a day." },
+                "shortness of breath": { name: "Shortness of Breath", medicine: "Inhaler", image: "01.jpg", dosage: "1 tsp with honey", timing: "Twice a day." }
+            };
+            return diseaseData[symptom.toLowerCase()] || null;
+        }
+
+        function displaySuggestions() {
+            const username = localStorage.getItem("username");
+            const age = localStorage.getItem("age");
+            const symptoms = localStorage.getItem("symptoms");
+
+            if (!username || !age || !symptoms) {
+                alert("Please enter all your details including symptoms.");
+                return;
+            }
+
+            let resultHTML = `<h3>Suggestions for ${username}, Age ${age}</h3>`;
+            let diseaseFound = false;
+
+            symptoms.split(",").forEach(symptom => {
+                let diseaseInfo = getDiseaseInfo(symptom.trim());
+                if (diseaseInfo) {
+                    diseaseFound = true;
+                    resultHTML += `
+                        <div class="container mt-4 border p-3 bg-white shadow">
+                            <h2 style="color:crimson;">${diseaseInfo.name.toUpperCase()}</h2>
+                            <p><b>Recommended Medicine:</b> ${diseaseInfo.medicine}</p>
+                            <p><b>Dosage:</b> ${diseaseInfo.dosage}</p>
+                            <p><b>Timing:</b> ${diseaseInfo.timing}</p>
+                            <div style="color:rgb(59, 20, 255)">Pictorial representation of <b>${diseaseInfo.medicine}</b></div>
+                            <img src="${diseaseInfo.image}" alt="${diseaseInfo.medicine}" width="150" height="200">
+                        </div>
+                    `;
+                }
+            });
+
+            if (!diseaseFound) {
+                resultHTML += `<div class="container mt-4 border p-3 bg-white shadow">
+                        <p style="color:red;">No disease or medicine found for the entered symptoms.</p>
+                    </div>`;
+            }
+
+            document.getElementById("result").innerHTML = resultHTML;
+        }
+
+        window.onload = displaySuggestions;
+    </script>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div id="result" class="mt-4"></div>
+    </div>
+</body>
+</html>
