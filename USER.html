@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Symptoms & Suggestions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-image: url('user.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+    }
+    .form-container {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+
+  <script>
+    function togglePasswordFields() {
+      const newUser = document.getElementById("newToAyush").value;
+      const confirmPasswordField = document.getElementById("confirmPasswordGroup");
+
+      if (newUser === "yes") {
+        confirmPasswordField.style.display = "block";
+      } else {
+        confirmPasswordField.style.display = "none";
+      }
+    }
+
+    function togglePasswordVisibility(id) {
+      const passwordField = document.getElementById(id);
+      passwordField.type = passwordField.type === "password" ? "text" : "password";
+    }
+
+    function saveData(event, nextPage) {
+      event.preventDefault();
+      
+      const username = document.getElementById("username").value.trim();
+      const age = document.getElementById("age").value.trim();
+      const gender = document.getElementById("gender").value;
+      const symptoms = document.getElementById("symptoms").value;
+      const newUser = document.getElementById("newToAyush").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (!username || !age || !gender || !symptoms || !password) {
+        alert("Please fill all required fields!");
+        return false;
+      }
+
+      if (newUser === "yes" && password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return false;
+      }
+
+      localStorage.setItem("username", username);
+      localStorage.setItem("age", age);
+      localStorage.setItem("gender", gender);
+      localStorage.setItem("symptoms", symptoms);
+      localStorage.setItem("newToAyush", newUser);
+      localStorage.setItem("password", password);
+      
+      window.location.href = nextPage;
+    }
+  </script>
+</head>
+<body class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="col-12 col-md-6 col-lg-4 form-container">
+    <h2 class="text-center">Enter Your Details</h2>
+    <form onsubmit="return false;">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Enter your name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="age" class="form-label">Age</label>
+        <input type="number" class="form-control" id="age" placeholder="Enter your age" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="gender" class="form-label">Gender</label>
+        <select id="gender" class="form-control" required>
+          <option value="">-- Select Gender --</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="newToAyush" class="form-label">New to Ayush?</label>
+        <select id="newToAyush" class="form-control" onchange="togglePasswordFields()" required>
+          <option value="">-- Select Option --</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+          <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password')">Show</button>
+        </div>
+      </div>
+
+      <div class="mb-3" id="confirmPasswordGroup" style="display: none;">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password">
+          <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('confirmPassword')">Show</button>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="symptoms" class="form-label">Select Symptom</label>
+        <select id="symptoms" class="form-control" required>
+          <option value="">-- Select Symptom --</option>
+          <option value="fever">Fever</option>
+          <option value="blood pressure">Blood Pressure</option>
+          <option value="diabetes">Diabetes</option>
+          <option value="asthma">Asthma</option>
+          <option value="bronchitis">Bronchitis</option>
+          <option value="stomach pain">Stomach Pain</option>
+          <option value="headache">Headache</option>
+          <option value="cold">Cold</option>
+          <option value="cough">Cough</option>
+          <option value="allergy">Allergy</option>
+          <option value="back pain">Back Pain</option>
+          <option value="joint pain">Joint Pain</option>
+          <option value="skin rash">Skin Rash</option>
+          <option value="eye irritation">Eye Irritation</option>
+          <option value="nausea">Nausea</option>
+          <option value="fatigue">Fatigue</option>
+          <option value="dizziness">Dizziness</option>
+          <option value="sore throat">Sore Throat</option>
+          <option value="chest pain">Chest Pain</option>
+          <option value="shortness of breath">Shortness of Breath</option>
+        </select>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button type="button" class="btn btn-success" onclick="saveData(event, 'SUGGESTION FOR USER.html')">Need Suggestions</button>
+        <button type="button" class="btn btn-warning" onclick="saveData(event, 'Appointment.html')">Book Appointment</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
