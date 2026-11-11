@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush Doctor Login</title>
+    <style>
+        body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('doctor.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        input, select, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+        }
+        .disease-container {
+            display: none; /* Hidden initially */
+            margin-top: 20px;
+        }
+        #medicineDetails {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e0f7fa;
+            border-radius: 5px;
+            display: none; /* Hidden initially */
+        }
+
+        /* Chat container styles */
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 30px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: white;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .chat-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Video and Voice buttons */
+        .video-voice-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .video-voice-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .video-voice-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Ayush Doctor Login</h2>
+        <form id="doctorLoginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="number" id="age" placeholder="Age" required>
+            <input type="file" id="certificate" accept="image/*" required>
+            <input type="text" id="certificateName" placeholder="Enter Name from Certificate" required>
+            <select id="certificateCourse" required>
+                <option value="">Enter Course from Certificate</option>
+                <option value="BAMS">BAMS - Bachelor of Ayurveda, Medicine and Surgery</option>
+                <option value="BHMS">BHMS - Bachelor of Homeopathic Medicine and Surgery</option>
+                <option value="BUMS">BUMS - Bachelor of Unani Medicine and Surgery</option>
+                <option value="BSMS">BSMS - Bachelor of Siddha Medicine and Surgery</option>
+                <option value="MD_Ayurveda">MD Ayurveda - Doctor of Medicine in Ayurveda</option>
+                <option value="MD_Homeopathy">MD Homeopathy - Doctor of Medicine in Homeopathy</option>
+                <option value="MD_Unani">MD Unani - Doctor of Medicine in Unani</option>
+                <option value="MD_Siddha">MD Siddha - Doctor of Medicine in Siddha</option>
+            </select>
+            <select id="specialization" required>
+                <option value="">Select Specialization</option>
+                <option value="Ayurveda">Ayurveda</option>
+                <option value="Homeopathy">Homeopathy</option>
+                <option value="Unani">Unani</option>
+                <option value="Siddha">Siddha</option>
+            </select>
+            <button type="submit">Login</button>
+        </form>
+        <p id="errorMessage" style="color: red;"></p>
+
+        <!-- Disease Input Form -->
+        <div class="disease-container" id="diseaseContainer">
+            <h3>Enter Disease to Get Medicine</h3>
+            <input type="text" id="diseaseInput" placeholder="Enter Disease" oninput="getMedicine()">
+            <div id="medicineDetails"></div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container" id="chatContainer" style="display:none;">
+            <div class="chat-box" id="chatBox"></div>
+            <textarea class="chat-input" id="chatInput" placeholder="Type your message..."></textarea>
+            <button class="video-voice-btn" onclick="startVideoChat()">Start Video Chat</button>
+            <button class="video-voice-btn" onclick="startVoiceChat()">Start Voice Chat</button>
+        </div>
+    </div>
+
+    <script>
+        // Sample database of diseases and corresponding medicines
+        const diseaseMedicineDatabase = {
+            "Diabetes": {
+                medicine: "Ayurveda: Bitter Gourd Juice",
+                dosage: "Take 1 tablespoon daily before meals."
+            },
+            "Hypertension": {
+                medicine: "Homeopathy: Crataegus Oxyacantha",
+                dosage: "Take 3 drops twice a day."
+            },
+            "Arthritis": {
+                medicine: "Unani: Harjaeeneh Powder",
+                dosage: "Take 1 teaspoon twice a day with warm water."
+            },
+            "Asthma": {
+                medicine: "Siddha: Koththumalar Thailam",
+                dosage: "Take 5 drops morning and night."
+            }
+            // Add more diseases and medicines as needed
+        };
+
+        document.getElementById("doctorLoginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const age = document.getElementById("age").value;
+            const certificate = document.getElementById("certificate").files[0];
+            const certificateName = document.getElementById("certificateName").value;
+            const certificateCourse = document.getElementById("certificateCourse").value;
+            const specialization = document.getElementById("specialization").value;
+            const allowedCertificates = ["ayush_degree1.jpg", "ayush_degree2.png", "ayush_degree3.jpeg"];
+            
+            // Mock certificate data for validation (In reality, you would extract this data from the certificate image)
+            const validNameOnCertificate = "Dr. John Doe";
+            const validCourseOnCertificate = "BAMS";
+
+            // Check if the certificate matches the name and course entered
+            if (certificateName !== validNameOnCertificate || certificateCourse !== validCourseOnCertificate) {
+                document.getElementById("errorMessage").textContent = "The name and course from the certificate do not match.";
+                return;
+            }
+            
+            if (!certificate || !certificate.type.startsWith("image/")) {
+                document.getElementById("errorMessage").textContent = "Only image format certificates are allowed.";
+                return;
+            }
+            
+            if (!allowedCertificates.includes(certificate.name)) {
+                document.getElementById("errorMessage").textContent = "Only Ayush degree certificates are allowed.";
+                return;
+            }
+            
+            if (age < 25 || age > 70) {
+                document.getElementById("errorMessage").textContent = "Age must be between 25 and 70.";
+                return;
+            }
+            
+            alert("Login successful!");
+            document.getElementById("doctorLoginForm").style.display = "none"; // Hide login form
+            document.getElementById("diseaseContainer").style.display = "block"; // Show disease input form
+            document.getElementById("chatContainer").style.display = "block"; // Show chat container
+        });
+
+        function getMedicine() {
+            const diseaseInput = document.getElementById("diseaseInput").value.trim();
+            const medicineDetails = document.getElementById("medicineDetails");
+            
+            if (diseaseMedicineDatabase[diseaseInput]) {
+                // Display the corresponding medicine and dosage
+                medicineDetails.style.display = "block";
+                medicineDetails.innerHTML = `
+                    <strong>Medicine:</strong> ${diseaseMedicineDatabase[diseaseInput].medicine}<br>
+                    <strong>Dosage:</strong> ${diseaseMedicineDatabase[diseaseInput].dosage}
+                `;
+            } else {
+                // Hide the medicine details if no match found
+                medicineDetails.style.display = "none";
+            }
+        }
+
+        function startVideoChat() {
+            alert("Starting video chat...");
+            // You can integrate WebRTC or another video service here
+        }
+
+        function startVoiceChat() {
+            alert("Starting voice chat...");
+            // You can integrate WebRTC or another voice service here
+        }
+
+        // Sample function to handle chat messages
+        document.getElementById('chatInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                const message = event.target.value.trim();
+                if (message) {
+                    const chatBox = document.getElementById('chatBox');
+                    const newMessage = document.createElement('div');
+                    newMessage.textContent = `Dr: ${message}`;
+                    chatBox.appendChild(newMessage);
+                    event.target.value = ''; // Clear input field
+                    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+                }
+            }
+        });
+    </script>
+</body>
+</html>
